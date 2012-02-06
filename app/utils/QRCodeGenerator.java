@@ -12,14 +12,7 @@ import com.google.zxing.common.*;
 
 public class QRCodeGenerator {
 
-	public static byte[] generateQrCode(String qrCodeString)
-			throws WriterException, IOException {
-		ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
-		generateQrCodeToStream(byteOut,qrCodeString,BarcodeFormat.QR_CODE,100,100,"PNG");
-		return byteOut.toByteArray();
-	}
-	
-	private static void generateQrCodeToStream(	OutputStream out,String qrCodeString,BarcodeFormat format,
+	public static void generateQrCodeToStream(	OutputStream out,String qrCodeString,BarcodeFormat format,
 																		int height,int width,String contentType) throws WriterException, IOException 
 	{
 		String data;
