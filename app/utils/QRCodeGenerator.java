@@ -12,7 +12,7 @@ import com.google.zxing.common.*;
 
 public class QRCodeGenerator {
 
-	public static void generateQrCodeToStream(	OutputStream out,String qrCodeString,BarcodeFormat format,
+	public static void generateCodeToStream(	OutputStream out,String qrCodeString,BarcodeFormat format,
 																		int height,int width,String contentType) throws WriterException, IOException
 	{
 		String data;
@@ -34,6 +34,6 @@ public class QRCodeGenerator {
 				"qr_png.png");
 		
 		//generateQrCodeToStream(out,"12345678901",BarcodeFormat.UPC_A,30,100,"PNG");
-		generateQrCodeToStream(out,"12345678901",BarcodeFormat.PDF_417,50,100,"PNG");
+		generateCodeToStream(out,"12345678901",BarcodeFormat.PDF_417,50,100,"PNG");
 	}
 }

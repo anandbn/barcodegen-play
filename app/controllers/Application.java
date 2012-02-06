@@ -19,10 +19,16 @@ public class Application extends Controller {
     public static void index() {
         render();
     }
-    public static void qrCode(String qrCodeText){
+    public static void qrCode(String i,String contentType,int width,int height){
      	try {
 			ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
-			QRCodeGenerator.generateQrCodeToStream(byteOut,qrCodeText,BarcodeFormat.QR_CODE,100,100,"PNG");			
+			if(width==0)
+				width=100;
+			if(height==0)
+				height=100;
+			if(contentType==null)
+				contentType="PNG";
+			QRCodeGenerator.generateCodeToStream(byteOut,i,BarcodeFormat.QR_CODE,height,width,contentType);			
 			renderBinary(new ByteArrayInputStream(byteOut.toByteArray()));
 		} catch (WriterException e) {
 			// TODO Auto-generated catch block
@@ -34,10 +40,39 @@ public class Application extends Controller {
 		renderText("Error rendering QR-Code");
     }
     
-    public static void upcCode(Long productNbr ){
+    public static void upcCode(Long i,String contentType,int width,int height){
      	try {
 			ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
-			QRCodeGenerator.generateQrCodeToStream(byteOut,String.valueOf(productNbr),BarcodeFormat.UPC_A,30,100,"PNG");			
+			if(width==0)
+				width=100;
+			if(height==0)
+				height=30;
+			if(contentType==null)
+				contentType="PNG";
+
+			QRCodeGenerator.generateCodeToStream(byteOut,String.valueOf(i),BarcodeFormat.UPC_A,height,width,contentType);			
+			renderBinary(new ByteArrayInputStream(byteOut.toByteArray()));
+		} catch (WriterException e) {
+			// TODO Auto-generated catch block
+			renderText(e.getMessage());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			renderText(e.getMessage());
+		}
+		renderText("Error rendering UPC Code");
+    }
+    
+    public static void pdf417(String i,String contentType,int width,int height){
+     	try {
+			ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+			if(width==0)
+				width=100;
+			if(height==0)
+				height=30;
+			if(contentType==null)
+				contentType="PNG";
+
+			QRCodeGenerator.generateCodeToStream(byteOut,String.valueOf(i),BarcodeFormat.PDF_417,height,width,contentType);			
 			renderBinary(new ByteArrayInputStream(byteOut.toByteArray()));
 		} catch (WriterException e) {
 			// TODO Auto-generated catch block
