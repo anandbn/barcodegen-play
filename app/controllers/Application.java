@@ -26,12 +26,12 @@ public class Application extends Controller {
 			renderBinary(new ByteArrayInputStream(byteOut.toByteArray()));
 		} catch (WriterException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			renderText(e.getMessage());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			renderText(e.getMessage());
 		}
-		renderText("Error rendering QRCode");
+		renderText("Error rendering QR-Code");
     }
     
     public static void upcCode(Long productNbr ){
@@ -41,12 +41,12 @@ public class Application extends Controller {
 			renderBinary(new ByteArrayInputStream(byteOut.toByteArray()));
 		} catch (WriterException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			renderText(e.getMessage());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			renderText(e.getMessage());
 		}
-		renderText("Error rendering QRCode");
+		renderText("Error rendering UPC Code");
     }
 
 }

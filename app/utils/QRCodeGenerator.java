@@ -13,14 +13,18 @@ import com.google.zxing.common.*;
 public class QRCodeGenerator {
 
 	public static void generateQrCodeToStream(	OutputStream out,String qrCodeString,BarcodeFormat format,
-																		int height,int width,String contentType) throws WriterException, IOException 
+																		int height,int width,String contentType) throws WriterException, IOException
 	{
 		String data;
 		data = new String(qrCodeString);
 		// get a byte matrix for the data
 		BitMatrix matrix = null;
 		com.google.zxing.Writer writer = new MultiFormatWriter();
-		matrix = writer.encode(data, format, width, height);
+		try{
+			matrix = writer.encode(data, format, width, height);
+		}catch(IllegalArgumentException ex){
+			throw new WriterException(ex.getMessage());
+		}
 		MatrixToImageWriter.writeToStream(matrix, contentType, out);
 		
 	}
