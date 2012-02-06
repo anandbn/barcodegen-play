@@ -6,6 +6,8 @@
 GET     /                                       Application.index
 
 GET     /qrCode									Application.qrCode
+GET     /upcCode								Application.upcCode
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 

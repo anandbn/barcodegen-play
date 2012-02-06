@@ -20,10 +20,24 @@ public class Application extends Controller {
         render();
     }
     public static void qrCode(String qrCodeText){
-     	byte[] qrCodeBytes=null;
-		try {
+     	try {
 			ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
 			QRCodeGenerator.generateQrCodeToStream(byteOut,qrCodeText,BarcodeFormat.QR_CODE,100,100,"PNG");			
+			renderBinary(new ByteArrayInputStream(byteOut.toByteArray()));
+		} catch (WriterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		renderText("Error rendering QRCode");
+    }
+    
+    public static void upcCode(Long productNbr ){
+     	try {
+			ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+			QRCodeGenerator.generateQrCodeToStream(byteOut,String.valueOf(productNbr),BarcodeFormat.UPC_A,30,100,"PNG");			
 			renderBinary(new ByteArrayInputStream(byteOut.toByteArray()));
 		} catch (WriterException e) {
 			// TODO Auto-generated catch block
