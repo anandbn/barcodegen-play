@@ -3,6 +3,7 @@ package controllers;
 import play.*;
 import play.db.jpa.JPA;
 import play.mvc.*;
+import utils.FacebookUtils;
 import utils.QRCodeGenerator;
 
 import java.io.ByteArrayInputStream;
@@ -27,7 +28,7 @@ public class Application extends Controller {
 			if(!results.isEmpty()){
 				System.out.println(">>>>>>>>>>>>>>>"+results.get(0));
 				DiscountCoupon coupon = results.get(0);
-				render(results.get(0));
+				render(coupon);
 			}
     	
     }
@@ -72,7 +73,17 @@ public class Application extends Controller {
 		}
 		renderText("Error rendering QR-Code");
     }
+  
     
+	public static void generateQrCode(String codeTxt, String title, String description,String contentType, int width,int height) {
+		
+		DiscountCoupon coupon = new DiscountCoupon(	java.util.UUID.randomUUID().toString(), 
+																				codeTxt, title, description,
+																				width, height, "QR_CODE",contentType);
+		coupon.create();
+		FacebookUtils.shareCouponOnFacebook(coupon);
+		renderText("Successfully posted to Facebook");
+    }
     public static void upcCode(Long i,String contentType,int width,int height){
      	try {
 			ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
