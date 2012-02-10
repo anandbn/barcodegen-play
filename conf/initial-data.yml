@@ -1,0 +1,15 @@
+DiscountCoupon(product1):
+    couponId: 1466f681-a56e-402c-b071-6d7277bdfd74
+    couponText: Product 1 Name
+    height: 100
+    width: 100
+    codeType: QR_CODE
+    contentType: PNG
+
+DiscountCoupon(product2):
+    couponId: d9df6587-3c8c-4e16-9e0e-c215594b3402
+    couponText: Product 2 Name
+    height: 100
+    width: 100
+    codeType: QR_CODE
+    contentType: PNG
