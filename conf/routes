@@ -5,6 +5,7 @@
 # Home page
 GET     /                       Application.index
 GET     /coupon                 Application.coupon
+GET     /availableCoupons       Application.availableCoupons
 GET     /qrCode					Application.qrCode
 GET     /upcCode				Application.upcCode
 GET 	/pdf417					Application.pdf417

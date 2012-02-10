@@ -32,6 +32,11 @@ public class Application extends Controller {
     	
     }
     
+    public static void availableCoupons() {
+    	List<DiscountCoupon> coupons = DiscountCoupon.findAll();
+		render(coupons);
+    }
+    
     public static void qrCode(String couponId,String i,String contentType,int width,int height){
      	try {
      		DiscountCoupon coupon=null;
