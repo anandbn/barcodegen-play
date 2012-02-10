@@ -1,0 +1,21 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<br/>
+<div class="container-fluid">
+#{list items:coupons, as:'coupon'}
+
+<div class="row-fluid">
+<ul class="thumbnails">
+  <li class="span2">
+    <div class="thumbnail">
+ 	  <img src="/qrCode?couponId=${coupon.couponId}" alt="">
+      <h5>${coupon.couponText}</h5>
+      <p>${coupon.description}</p>
+    </div>
+  </li>
+</ul>
+</div>
+#{/list}
+
+</div>
