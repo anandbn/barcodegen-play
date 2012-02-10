@@ -1,6 +1,7 @@
 package controllers;
 
 import play.*;
+import play.db.jpa.JPA;
 import play.mvc.*;
 import utils.QRCodeGenerator;
 
@@ -13,24 +14,51 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 
 import models.*;
-
 public class Application extends Controller {
 
     public static void index() {
+    	System.out.println(String.format("Random UUID:%s",java.util.UUID.randomUUID()));
         render();
     }
-    public static void qrCode(String i,String contentType,int width,int height){
+    
+    public static void coupon(String couponId) {
+    	List<DiscountCoupon> results = DiscountCoupon.find("couponid", couponId).fetch();
+			
+			if(!results.isEmpty()){
+				System.out.println(">>>>>>>>>>>>>>>"+results.get(0));
+				DiscountCoupon coupon = results.get(0);
+				render(results.get(0));
+			}
+    	
+    }
+    
+    public static void qrCode(String couponId,String i,String contentType,int width,int height){
      	try {
+     		DiscountCoupon coupon=null;
 			ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
-			if(width==0)
-				width=100;
-			if(height==0)
-				height=100;
-			if(contentType==null)
-				contentType="PNG";
-			QRCodeGenerator.generateCodeToStream(byteOut,i,BarcodeFormat.QR_CODE,height,width,contentType);			
-			renderBinary(new ByteArrayInputStream(byteOut.toByteArray()));
-		} catch (WriterException e) {
+     		if(couponId!=null){
+     			List<DiscountCoupon> results = DiscountCoupon.find("couponid", couponId).fetch();
+     			
+     			if(!results.isEmpty()){
+     				coupon = results.get(0);
+     			}
+         		if(coupon!=null){
+        			QRCodeGenerator.generateCodeToStream(byteOut,coupon.couponText,
+        					BarcodeFormat.valueOf(coupon.codeType),coupon.height,coupon.width,coupon.contentType);			
+         		}
+     		}else{
+     			if(i==null||i.trim().length()==0){
+     				throw new WriterException("Invalid Coupon Number");
+     			}
+    			if(width==0)
+    				width=100;
+    			if(height==0)
+    				height=100;
+    			if(contentType==null)
+    				contentType="PNG";
+     		}
+  			renderBinary(new ByteArrayInputStream(byteOut.toByteArray()));	
+     	} catch (WriterException e) {
 			// TODO Auto-generated catch block
 			renderText(e.getMessage());
 		} catch (IOException e) {

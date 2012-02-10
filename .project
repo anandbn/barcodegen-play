@@ -15,5 +15,8 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.playframework.playclipse.playNature</nature>
 	</natures>
-	
+	<linkedResources><link><name>securesocial-0.2.3</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/qrcodegen/modules/securesocial-0.2.3/app</location></link>
+<link><name>conf/securesocial-0.2.3</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/qrcodegen/modules/securesocial-0.2.3/conf</location></link>
+<link><name>public/securesocial-0.2.3</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/qrcodegen/modules/securesocial-0.2.3/public</location></link>
+</linkedResources>
 </projectDescription>

@@ -3,12 +3,12 @@
 # ~~~~
 
 # Home page
-GET     /                                       Application.index
-
-GET     /qrCode									Application.qrCode
-GET     /upcCode								Application.upcCode
-GET 	/pdf417									Application.pdf417
-
+GET     /                       Application.index
+GET     /coupon                 Application.coupon
+GET     /qrCode					Application.qrCode
+GET     /upcCode				Application.upcCode
+GET 	/pdf417					Application.pdf417
+GET     /auth       				module:securesocial
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
