@@ -34,6 +34,18 @@ public class Application extends Controller {
     	
     }
     
+    public static void deleteCoupon(String couponId) {
+    	List<DiscountCoupon> results = DiscountCoupon.find("couponid", couponId).fetch();
+			
+			if(!results.isEmpty()){
+				System.out.println(">>>>>>>>>>>>>>>"+results.get(0));
+				results.get(0).delete();
+				System.out.println(">>>>>>>>>>>>>>> Deleted coupon:"+results.get(0));
+				renderText(String.format("Coupon:%s deleted",results.get(0).couponId));
+			}
+    	
+    }
+    
     public static void availableCoupons() {
     	List<DiscountCoupon> coupons = DiscountCoupon.findAll();
 		render(coupons);
@@ -79,6 +91,17 @@ public class Application extends Controller {
     
 	public static void generateQrCode(String codeTxt, String title, String description,String contentType, int width,int height) {
 		
+		if(codeTxt==null||codeTxt.trim().length()==0){
+				renderText("'codeTxt' paramter cannot be empty");
+			}
+		if(width==0)
+			width=100;
+		if(height==0)
+			height=100;
+		if(contentType==null)
+			contentType="PNG";
+		if(title==null)
+			title=codeTxt;
 		DiscountCoupon coupon = new DiscountCoupon(	java.util.UUID.randomUUID().toString(), 
 																				codeTxt, title, description,
 																				width, height, "QR_CODE",contentType);
@@ -89,9 +112,9 @@ public class Application extends Controller {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			renderText("Coupon generation failed !!!!");
+			renderText("Coupon sharing failed !!!!");
 		}
-		renderText("Successfully posted to Facebook");
+		renderText("Successfully shared to Facebook");
     }
     public static void upcCode(Long i,String contentType,int width,int height){
      	try {

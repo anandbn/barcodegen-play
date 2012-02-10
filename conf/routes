@@ -6,6 +6,7 @@
 GET     /                       Application.index
 GET     /coupon                 Application.coupon
 GET     /availableCoupons       Application.availableCoupons
+GET     /deleteCoupon           Application.deleteCoupon
 GET     /generate/qrCode         Application.generateQrCode
 
 GET     /qrCode					Application.qrCode
