@@ -3,15 +3,14 @@
 
 <br/>
 <div class="container-fluid">
-#{list items:coupons, as:'coupon'}
-
 <div class="row-fluid">
+#{list items:coupons, as:'coupon'}
     <div class="thumbnail">
  	  <img src="/qrCode?couponId=${coupon.couponId}" alt="">
       <h5><a href="/coupon?couponId=${coupon.couponId}">${coupon.couponText}</a></h5>
       <p>${coupon.description}</p>
     </div>
-</div>
 #{/list}
+</div>
 
 </div>
