@@ -49,6 +49,7 @@ public class Application extends Controller {
      			if(!results.isEmpty()){
      				coupon = results.get(0);
      			}
+     			System.out.println(String.format(">>>>>>>>>>>>>>> Got Coupon Record: %s",coupon));
          		if(coupon!=null){
         			QRCodeGenerator.generateCodeToStream(byteOut,coupon.couponText,
         					BarcodeFormat.valueOf(coupon.codeType),coupon.height,coupon.width,coupon.contentType);			
@@ -82,6 +83,7 @@ public class Application extends Controller {
 																				codeTxt, title, description,
 																				width, height, "QR_CODE",contentType);
 		coupon.create();
+		System.out.println(">>>>>>>>>>>> Created Coupon in DB:"+coupon);
 		try {
 			FacebookUtils.shareCouponOnFacebook(coupon);
 		} catch (UnsupportedEncodingException e) {
