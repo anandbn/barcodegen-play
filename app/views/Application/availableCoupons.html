@@ -6,15 +6,11 @@
 #{list items:coupons, as:'coupon'}
 
 <div class="row-fluid">
-<ul class="thumbnails">
-  <li class="span2">
     <div class="thumbnail">
  	  <img src="/qrCode?couponId=${coupon.couponId}" alt="">
       <h5><a href="/coupon?couponId=${coupon.couponId}">${coupon.couponText}</a></h5>
       <p>${coupon.description}</p>
     </div>
-  </li>
-</ul>
 </div>
 #{/list}
 
