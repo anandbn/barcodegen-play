@@ -9,6 +9,7 @@ import utils.QRCodeGenerator;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 import com.google.zxing.BarcodeFormat;
@@ -81,7 +82,13 @@ public class Application extends Controller {
 																				codeTxt, title, description,
 																				width, height, "QR_CODE",contentType);
 		coupon.create();
-		FacebookUtils.shareCouponOnFacebook(coupon);
+		try {
+			FacebookUtils.shareCouponOnFacebook(coupon);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			renderText("Coupon generation failed !!!!");
+		}
 		renderText("Successfully posted to Facebook");
     }
     public static void upcCode(Long i,String contentType,int width,int height){
