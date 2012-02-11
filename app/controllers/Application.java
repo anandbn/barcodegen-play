@@ -116,7 +116,7 @@ public class Application extends Controller {
 		if(System.getenv("FB_ACCESS_TOKEN")!=null && System.getenv("FB_ACCESS_TOKEN").length()>0){
 			try {
 				FacebookUtils.shareCouponOnFacebook(coupon);
-				System.out.println(">>>>>>>>>>>> Shared coupon on Facebook:"+coupon);
+				System.out.println(">>>>>>>>>>>> Shared coupon on Facebook	:"+coupon);
 
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
