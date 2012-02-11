@@ -2,6 +2,8 @@ package controllers;
 
 import play.*;
 import play.db.jpa.JPA;
+import play.libs.WS.HttpResponse;
+import play.modules.pusher.Pusher;
 import play.mvc.*;
 import utils.FacebookUtils;
 import utils.QRCodeGenerator;
@@ -111,15 +113,29 @@ public class Application extends Controller {
 																				width, height, "QR_CODE",contentType);
 		coupon.create();
 		System.out.println(">>>>>>>>>>>> Created Coupon in DB:"+coupon);
-		try {
-			FacebookUtils.shareCouponOnFacebook(coupon);
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			renderText("Coupon sharing failed !!!!");
+		if(System.getenv("FB_ACCESS_TOKEN")!=null && System.getenv("FB_ACCESS_TOKEN").length()>0){
+			try {
+				FacebookUtils.shareCouponOnFacebook(coupon);
+				System.out.println(">>>>>>>>>>>> Shared coupon on Facebook:"+coupon);
+
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				renderText("Coupon sharing failed !!!!");
+			}
 		}
+		Pusher pusher = new Pusher();
+		String jsonPushMessage = String.format("{\"title\":\"%s\",\"imgSrc\":\"%s\",\"description\":\"%s\"}",
+																	coupon.title,
+																	"/qrCode?couponId="+coupon.couponId,
+																	coupon.description);
+		System.out.println(">>>>>>>>>> Sending JSON message:"+jsonPushMessage);
+		HttpResponse response = pusher.trigger("coupons", "new_coupon",jsonPushMessage);
+    	System.out.println(String.format("Sent pusher message successfully. Response :%s",response.getStatus()));
+    
 		coupon(coupon.couponId);
     }
+	/*
     public static void upcCode(Long i,String contentType,int width,int height){
      	try {
 			ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
@@ -163,5 +179,6 @@ public class Application extends Controller {
 		}
 		renderText("Error rendering UPC Code");
     }
+    */
 
 }

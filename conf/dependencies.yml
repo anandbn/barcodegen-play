@@ -3,3 +3,4 @@
 require:
     - play
     - play -> securesocial 0.2.3
+    - play -> pusher 0.1
