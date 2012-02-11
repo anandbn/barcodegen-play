@@ -23,6 +23,10 @@ public class Application extends Controller {
         render();
     }
     
+    public static void newCoupon(){
+    	render();
+    }
+    
     public static void coupon(String couponId) {
     	List<DiscountCoupon> results = DiscountCoupon.find("couponid", couponId).fetch();
 			
@@ -41,9 +45,9 @@ public class Application extends Controller {
 				System.out.println(">>>>>>>>>>>>>>>"+results.get(0));
 				results.get(0).delete();
 				System.out.println(">>>>>>>>>>>>>>> Deleted coupon:"+results.get(0));
-				renderText(String.format("Coupon:%s deleted",results.get(0).couponId));
+				availableCoupons();
 			}
-    	
+			
     }
     
     public static void availableCoupons() {
@@ -114,7 +118,7 @@ public class Application extends Controller {
 			e.printStackTrace();
 			renderText("Coupon sharing failed !!!!");
 		}
-		renderText("Successfully shared to Facebook");
+		coupon(coupon.couponId);
     }
     public static void upcCode(Long i,String contentType,int width,int height){
      	try {
