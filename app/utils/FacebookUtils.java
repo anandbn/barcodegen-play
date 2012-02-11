@@ -18,7 +18,7 @@ public class FacebookUtils {
 		params = new HashMap<String,Object>();
 		params.put("access_token",System.getenv("FB_ACCESS_TOKEN"));
 		params.put("link", URLEncoder.encode(String.format("http://barcodegen.herokuapp.com/coupon?couponId=%s",coupon.couponId),"UTF-8"));
-		params.put("message","Coupon:"+coupon.couponTitle);
+		params.put("message","Coupon:"+coupon.title);
 		WS.url("https://graph.facebook.com/me/links").params(params).post();
 	}
 }
