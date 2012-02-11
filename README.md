@@ -1,4 +1,6 @@
-# Sample QR Code Generation app that uses Play! framework and Pusher for real time notifications
+# Sample QR Code Generator
+
+### QR Codes and ZXing library
 
 ### Talk about Pusher add-on
 
@@ -8,3 +10,4 @@
 
 ### Heroku Environment Variables
 
+### Facebook integration
