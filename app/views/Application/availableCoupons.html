@@ -27,39 +27,30 @@
     	});
   	</script>
 
-<br/>
 <div class="container-fluid">
-<div class="row">
-<div class="span5">
-	<a href="/coupon/new" class="btn btn-primary">Add</a>
-</div>
-<div class="span7">&nbsp;</div>
-</div>
-#{list items:coupons, as:'coupon'}
-<div class="row">
-<div class="span1">
-</div>
-<div class="span2">
-<ul class="thumbnails">
-  <li class="span2">
-    <div class="thumbnail">
- 	  <img src="/qrCode?couponId=${coupon.couponId}" alt="">
-      <h5><a href="/coupon?couponId=${coupon.couponId}">${coupon.couponText}</a></h5>
-      <p>${coupon.description}</p>
-    </div>
-  </li>
-</ul>
-</div>
-<div class="span2">
-<form action="/deleteCoupon" method="DELETE">
-<button type="submit" class="btn btn-primary">Delete</button>
-<input type="hidden" name="couponId" id="couponId" value="${coupon.couponId}"/>
-</form>
-</div>
-<div class="span7">
-</div>
-</div>
-
-#{/list}
-
+	#{list items:coupons, as:'coupon'}
+	<div class="row">
+		<div class="span1">
+		</div>
+		<div class="span2">
+			<ul class="thumbnails">
+			  <li class="span2">
+				<div class="thumbnail">
+				  <img src="/qrCode?couponId=${coupon.couponId}" alt="">
+				  <h5><a href="/coupon?couponId=${coupon.couponId}">${coupon.couponText}</a></h5>
+				  <p>${coupon.description}</p>
+				</div>
+			  </li>
+			</ul>
+		</div>
+		<div class="span2">
+			<form action="/deleteCoupon" method="DELETE">
+			<button type="submit" class="btn btn-primary">Delete</button>
+			<input type="hidden" name="couponId" id="couponId" value="${coupon.couponId}"/>
+			</form>
+		</div>
+		<div class="span7">
+		</div>
+	</div>
+	#{/list}
 </div>
