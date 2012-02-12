@@ -21,8 +21,7 @@ import models.*;
 public class Application extends Controller {
 
     public static void index() {
-    	System.out.println(String.format("Random UUID:%s",java.util.UUID.randomUUID()));
-        render();
+        availableCoupons();
     }
     
     public static void newCoupon(){
