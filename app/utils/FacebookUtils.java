@@ -42,7 +42,7 @@ public class FacebookUtils {
 				e.printStackTrace();
 			}
 			WS.FileParam imageFile = new WS.FileParam(tmpImg, "data");
-			WS.HttpResponse response  = WS.url("https://graph.facebook.com/100003142167612/photos").params(params).files(imageFile).timeout("5mn").post();
+			WS.HttpResponse response  = WS.url("https://graph.facebook.com/me/photos").params(params).files(imageFile).timeout("5mn").post();
 			System.out.println(String.format("Posted Image to /photos. Response code:%s,Body:%s",response.getStatus(),response.getJson().toString()));
 			tmpImg.delete();
 		}
