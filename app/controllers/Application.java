@@ -2,6 +2,7 @@ package controllers;
 
 import play.*;
 import play.db.jpa.JPA;
+import play.libs.F;
 import play.libs.WS.HttpResponse;
 import play.modules.pusher.Pusher;
 import play.mvc.*;
@@ -113,15 +114,9 @@ public class Application extends Controller {
 		coupon.create();
 		System.out.println(">>>>>>>>>>>> Created Coupon in DB:"+coupon);
 		if(System.getenv("FB_ACCESS_TOKEN")!=null && System.getenv("FB_ACCESS_TOKEN").length()>0){
-			try {
-				FacebookUtils.shareCouponOnFacebook(coupon);
-				System.out.println(">>>>>>>>>>>> Shared coupon on Facebook	:"+coupon);
-
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				renderText("Coupon sharing failed !!!!");
-			}
+			FacebookUtils job = new FacebookUtils(coupon);
+            job.now();
+			System.out.println(">>>>>>>>>>>> Sent Async message to share coupon on Facebook	:"+coupon);
 		}
 		Pusher pusher = new Pusher();
 		String jsonPushMessage = String.format("{\"title\":\"%s\",\"imgSrc\":\"%s\",\"description\":\"%s\"}",
