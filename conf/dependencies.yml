@@ -1,6 +1,6 @@
 # Application dependencies
 
 require:
-    - play
-    - play -> securesocial 0.2.3
     - play -> pusher 0.1
+    - org.apache.httpcomponents -> httpclient 4.1.3
+    - org.apache.httpcomponents -> httpmime 4.1.3
