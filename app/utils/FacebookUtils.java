@@ -11,10 +11,6 @@ import java.util.UUID;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 
-import org.apache.http.client.methods.*;
-import org.apache.http.entity.mime.*;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.client.*;
 
 import play.jobs.Job;
 import play.libs.WS;
