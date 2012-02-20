@@ -1,6 +1,13 @@
 #{extends 'main.html' /}
 #{set title:'New Coupon' /}
 <br/>
+#{ifErrors}
+  <div class="alert alert-error">
+  #{errors}
+       ${error}<br/>
+  #{/errors}
+  </div>
+#{/ifErrors}
 <div class="container-fluid">
   <div class="row">
   	<div class="span2">
@@ -24,6 +31,12 @@
 		<select id="contentType" name="contenType">
 			<option>JPG</option>
 			<option selected>PNG</option>
+		</select>
+		<label for="codeType" class="control-label">Type of Code</label>
+		<select id="codeType" name="codeType">
+			<option selected>QR_CODE</option>
+			<option>PDF_417</option>
+			<option>UPC_A</option>
 		</select>
         <div class="form-actions">
         <button type="submit" class="btn btn-primary">Generate</button>

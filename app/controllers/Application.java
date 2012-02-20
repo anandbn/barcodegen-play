@@ -95,39 +95,58 @@ public class Application extends Controller {
     }
   
     
-	public static void generateQrCode(String codeTxt, String title, String description,String contentType, int width,int height) {
-		
-		if(codeTxt==null||codeTxt.trim().length()==0){
-				renderText("'codeTxt' paramter cannot be empty");
+	public static void generateQrCode(String codeTxt, String title, String description,String contentType,String codeType, int width,int height) {
+		if(codeType.equalsIgnoreCase("UPC_A")){
+			if(codeTxt==null || codeTxt.length()<11){
+				validation.addError("codeTxt", "For UPC Codes, the coupon text needs to be a 11 or 12 digit numeric value");
 			}
-		if(width==0)
-			width=100;
-		if(height==0)
-			height=100;
-		if(contentType==null)
-			contentType="PNG";
-		if(title==null)
-			title=codeTxt;
-		DiscountCoupon coupon = new DiscountCoupon(	java.util.UUID.randomUUID().toString(), 
-																				codeTxt, title, description,
-																				width, height, "QR_CODE",contentType);
-		coupon.create();
-		System.out.println(">>>>>>>>>>>> Created Coupon in DB:"+coupon);
-		if(System.getenv("FB_ACCESS_TOKEN")!=null && System.getenv("FB_ACCESS_TOKEN").length()>0){
-			FacebookUtils job = new FacebookUtils(coupon);
-            job.now();
-			System.out.println(">>>>>>>>>>>> Sent Async message to share coupon on Facebook	:"+coupon);
+			try{
+				Long.parseLong(codeTxt);
+			}catch(Exception ex){
+				validation.addError("codeTxt", "For UPC Codes, the coupon text needs to be a 11 or 12 digit numeric value");
+				params.flash();
+				validation.keep();
+				newCoupon();
+				return;
+			}
+			
+		}else if(codeTxt==null || codeTxt.length()<11){
+			validation.addError("codeTxt", "Code Text cannot be empty. Please enter a valid value.");
+			params.flash();
+			validation.keep();
+			newCoupon();
+			return;
 		}
-		Pusher pusher = new Pusher();
-		String jsonPushMessage = String.format("{\"title\":\"%s\",\"imgSrc\":\"%s\",\"description\":\"%s\"}",
-																	coupon.title,
-																	"/qrCode?couponId="+coupon.couponId,
-																	coupon.description);
-		System.out.println(">>>>>>>>>> Sending JSON message:"+jsonPushMessage);
-		HttpResponse response = pusher.trigger("coupons", "new_coupon",jsonPushMessage);
-    	System.out.println(String.format("Sent pusher message successfully. Response :%s",response.getStatus()));
-    
-		coupon(coupon.couponId);
+			
+			if(width==0)
+				width=100;
+			if(height==0)
+				height=100;
+			if(contentType==null)
+				contentType="PNG";
+			if(title==null)
+				title=codeTxt;
+			DiscountCoupon coupon = new DiscountCoupon(	java.util.UUID.randomUUID().toString(), 
+																					codeTxt, title, description,
+																					width, height, codeType,contentType);
+			coupon.create();
+			System.out.println(">>>>>>>>>>>> Created Coupon in DB:"+coupon);
+			if(System.getenv("FB_ACCESS_TOKEN")!=null && System.getenv("FB_ACCESS_TOKEN").length()>0){
+				FacebookUtils job = new FacebookUtils(coupon);
+	            job.now();
+				System.out.println(">>>>>>>>>>>> Sent Async message to share coupon on Facebook	:"+coupon);
+			}
+			Pusher pusher = new Pusher();
+			String jsonPushMessage = String.format("{\"title\":\"%s\",\"imgSrc\":\"%s\",\"description\":\"%s\"}",
+																		coupon.title,
+																		"/qrCode?couponId="+coupon.couponId,
+																		coupon.description);
+			System.out.println(">>>>>>>>>> Sending JSON message:"+jsonPushMessage);
+			HttpResponse response = pusher.trigger("coupons", "new_coupon",jsonPushMessage);
+	    	System.out.println(String.format("Sent pusher message successfully. Response :%s",response.getStatus()));
+	    
+			coupon(coupon.couponId);
+
     }
 	/*
     public static void upcCode(Long i,String contentType,int width,int height){
