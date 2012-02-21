@@ -97,7 +97,7 @@ public class Application extends Controller {
     
 	public static void generateQrCode(String codeTxt, String title, String description,String contentType,String codeType, int width,int height) {
 		if(codeType.equalsIgnoreCase("UPC_A")){
-			if(codeTxt==null || codeTxt.length()<11){
+			if(codeTxt==null || codeTxt.length()<11 || codeTxt.length()>12){
 				validation.addError("codeTxt", "For UPC Codes, the coupon text needs to be a 11 or 12 digit numeric value");
 			}
 			try{
