@@ -1,0 +1,16 @@
+#{extends 'main.html' /}
+#{set title:'Facebook Login/Access Token' /}
+
+<div class="row">
+		<div class="span1">
+		</div>
+		<div class="span5">
+ 
+        <ul>
+           <li>User id: ${user.id.id}</li>
+           <li>Logged in from: ${user.id.provider}</li>
+           <li>Email: ${user.email}</li>
+           <li>Access Token: ${user.accessToken}</li>
+        </ul>
+		</div>
+</div>   

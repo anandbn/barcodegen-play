@@ -15,6 +15,9 @@ GET     /qrCode					Application.qrCode
 GET     /upcCode				Application.upcCode
 GET 	/pdf417					Application.pdf417
 
+#Facebook Authentication
+*       /auth       module:securesocial
+GET     /facebook/login			FBLogin.index
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
