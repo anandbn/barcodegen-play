@@ -27,29 +27,27 @@
     	});
   	</script>
 
-	#{list items:coupons, as:'coupon'}
 	<div class="row">
 		<div class="span1">
 		</div>
-		<div class="span2">
+		<div class="span9">
 			<ul class="thumbnails">
-			  <li class="span2">
+			 #{list items:coupons, as:'coupon'}
+			  <li class="span3">
 				<div class="thumbnail">
 				  <img src="/qrCode?couponId=${coupon.couponId}" alt="">
 				  <h5><a href="/coupon?couponId=${coupon.couponId}">${coupon.couponText}</a></h5>
 				  <p>${coupon.description}</p>
-				</div>
+				</div><br/>
+				<form action="/deleteCoupon" method="DELETE">
+					<button type="submit" class="btn btn-primary">Delete</button>
+					<input type="hidden" name="couponId" id="couponId" value="${coupon.couponId}"/>
+				</form>
 			  </li>
+			#{/list}
 			</ul>
 		</div>
-		<div class="span2">
-			<form action="/deleteCoupon" method="DELETE">
-			<button type="submit" class="btn btn-primary">Delete</button>
-			<input type="hidden" name="couponId" id="couponId" value="${coupon.couponId}"/>
-			</form>
-		</div>
-		<div class="span7">
+		<div class="span1">
 		</div>
 	</div>
-	#{/list}
 

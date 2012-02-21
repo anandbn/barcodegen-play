@@ -3021,6 +3021,8 @@ button.btn.small, input[type="submit"].btn.small {
   display: block;
   padding: 4px;
   line-height: 1;
+  height:200px;
+  overflow:auto;
   border: 1px solid #ddd;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
