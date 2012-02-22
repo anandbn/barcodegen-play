@@ -26,7 +26,8 @@ public class Application extends Controller {
     }
     
     public static void admin() {
-        render();
+    	List<DiscountCoupon> coupons = DiscountCoupon.findAll();
+		render(coupons);
     }
     
     public static void newCoupon(){
