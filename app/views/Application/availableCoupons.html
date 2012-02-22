@@ -62,11 +62,7 @@
 				  <img src="/qrCode?couponId=${coupon.couponId}" alt="">
 				  <h5><a href="/coupon?couponId=${coupon.couponId}">${coupon.couponText}</a></h5>
 				  <p>${coupon.description}</p>
-				</div><br/>
-				<form action="/deleteCoupon" method="DELETE">
-					<button type="submit" class="btn btn-primary">Delete</button>
-					<input type="hidden" name="couponId" id="couponId" value="${coupon.couponId}"/>
-				</form>
+				</div>
 			  </li>
 			#{/list}
 			</ul>
