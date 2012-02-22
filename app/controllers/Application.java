@@ -25,6 +25,10 @@ public class Application extends Controller {
         availableCoupons();
     }
     
+    public static void admin() {
+        render();
+    }
+    
     public static void newCoupon(){
     	render();
     }

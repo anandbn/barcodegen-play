@@ -1,0 +1,74 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+#{set 'morescripts'}
+		<script type="text/javascript">
+    	// Enable pusher logging - don't include this in production
+    	Pusher.log = function(message) {
+      		if (window.console && window.console.log) window.console.log(message);
+    	};
+
+    	// Flash fallback logging - don't include this in production
+    	WEB_SOCKET_DEBUG = true;
+
+    	var pusher = new Pusher('42124b048eefe2f59ea8');
+    	var channel = pusher.subscribe('coupons');
+    	channel.bind('new_coupon', function(data) {
+    		$.gritter.add({
+				// (string | mandatory) the heading of the notification
+				title: data.title,
+				// (string | mandatory) the text inside the notification
+				text: data.description,
+
+				image: data.imgSrc,
+				// (bool | optional) if you want it to fade out on its own or just sit there
+				sticky: true,
+				// (int | optional) the time you want it to be alive for before fading out
+				time: ''
+			});
+    	});
+    	
+  	</script>
+   #{/set}
+       <div class="row-fluid">
+        <div class="span3">
+        </div><!--/span-->
+        <div class="span9 well">
+          <div class="hero-unit">
+            <h1>Green Apples </h1>
+            <p>Two cameras for FaceTime and HD video recording. The dual-core A5 chip. 10-hour battery life.
+            Over 200 new software features in iOS 5. And iCloud. 
+            All in a remarkably thin, light design. There's so much to iPad, it's amazing there's so little of it.</p>
+            <p><a class="btn btn-primary btn-large">Order Here></a></p>
+          </div>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span3">
+            
+        </div>
+        <div class="span9">
+        	<h1>Get your Discount coupons here</h1>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span3">
+            
+        </div>
+        <div class="span9 well">
+			<ul class="thumbnails">
+			 #{list items:coupons, as:'coupon'}
+			  <li class="span3">
+				<div class="thumbnail">
+				  <img src="/qrCode?couponId=${coupon.couponId}" alt="">
+				  <h5><a href="/coupon?couponId=${coupon.couponId}">${coupon.couponText}</a></h5>
+				  <p>${coupon.description}</p>
+				</div><br/>
+				<form action="/deleteCoupon" method="DELETE">
+					<button type="submit" class="btn btn-primary">Delete</button>
+					<input type="hidden" name="couponId" id="couponId" value="${coupon.couponId}"/>
+				</form>
+			  </li>
+			#{/list}
+			</ul>
+        </div>
+      </div>

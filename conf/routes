@@ -11,6 +11,7 @@ GET     /coupon/new         	Application.newCoupon
 
 POST     /qrCode         		Application.generateQrCode
 
+GET		/admin					Application.admin
 GET     /qrCode					Application.qrCode
 GET     /upcCode				Application.upcCode
 GET 	/pdf417					Application.pdf417
