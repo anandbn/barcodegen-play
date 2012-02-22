@@ -15,10 +15,10 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.playframework.playclipse.playNature</nature>
 	</natures>
-	<linkedResources><link><name>pusher-0.1</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/qrcodegen/modules/pusher-0.1/app</location></link>
-<link><name>conf/pusher-0.1</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/qrcodegen/modules/pusher-0.1/conf</location></link>
-<link><name>securesocial-0.2.4</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/qrcodegen/modules/securesocial-0.2.4/app</location></link>
-<link><name>conf/securesocial-0.2.4</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/qrcodegen/modules/securesocial-0.2.4/conf</location></link>
-<link><name>public/securesocial-0.2.4</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/qrcodegen/modules/securesocial-0.2.4/public</location></link>
+	<linkedResources><link><name>pusher-0.1</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/greenapples/modules/pusher-0.1/app</location></link>
+<link><name>conf/pusher-0.1</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/greenapples/modules/pusher-0.1/conf</location></link>
+<link><name>securesocial-0.2.4</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/greenapples/modules/securesocial-0.2.4/app</location></link>
+<link><name>conf/securesocial-0.2.4</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/greenapples/modules/securesocial-0.2.4/conf</location></link>
+<link><name>public/securesocial-0.2.4</name><type>2</type><location>/Users/anandbashyamnarasimhan/javaworkspace/greenapples/modules/securesocial-0.2.4/public</location></link>
 </linkedResources>
 </projectDescription>
