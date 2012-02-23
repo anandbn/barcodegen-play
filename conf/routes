@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                       Application.index
+*     /                       Application.index
 GET     /coupon                 Application.coupon
 GET     /coupons      			Application.availableCoupons
 GET     /deleteCoupon          Application.deleteCoupon
