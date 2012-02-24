@@ -1,0 +1,68 @@
+#{extends 'main.html' /}
+#{set title:'Order Now: Step 2' /}
+
+#{set 'morescripts'}
+<script type="text/javascript">
+
+function validate(){
+	var requiredFields = $(".required");
+	var hasErrors=false;
+	var errMsg = "Required Fields:\n";
+	for(var i=0;i<requiredFields.length;i++){
+		if($("#"+requiredFields[i].id).val()==""){
+			$("#"+requiredFields[i].id).parent().addClass("error");
+			hasErrors=true;
+		}else{
+			$("#"+requiredFields[i].id).parent().removeClass("error");
+		}
+		
+	}
+	
+	return !hasErrors;
+
+}
+</script>
+
+#{/set}
+
+#{set 'moreStyles'}
+img{width:300px;height:190px}
+#{/set}
+<div class="container-fluid">
+	
+	<div class="row-fluid">
+		<div class="span2">
+		</div>
+		
+		<div class="span10">
+			<form class="well" method="POST" action="/OrderNow/step5">
+				#{list items:flowResponse.interview.fields, as:'theField'}
+    				
+					#{if theField.fieldType == 'DISPLAY_TEXT' }
+    					<label class="control-label">
+    						#{verbatim}${theField.fieldText}#{/verbatim}
+    					</label>
+					#{/if}
+					#{if theField.fieldType == 'TEXT_INPUT' }
+						<div class="control-group">
+							<label for="${theField.name}" class="control-label">${theField.fieldText}</label>
+        					<input class="focussed #{if theField.required}required#{/if}" type="text" id="${theField.name}" name="${theField.name}" placeholder="${theField.rawValue}"/>
+						</div>
+					#{/if}
+				#{/list}
+			<div class="form-actions">
+        		<button type="submit" onClick=" return validate();" class="btn btn-primary">Next</button>
+        	</div>
+			</form>
+			
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span10">&nbsp;</div>
+		<div class="span2">
+			<a href="/OrderNow/step4" class="btn-large active">
+			Next	
+			</a>
+		</div>
+	</div
+</div>

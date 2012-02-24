@@ -2,4 +2,10 @@
 
 require:
     - play -> pusher 0.1
-    - play -> securesocial 0.2.4
+    - com.force.api -> force-rest-api 0.0.15
+repositories:
+    - forcerestapi:
+        type: iBiblio
+        root: "http://jesperfj.github.com/force-rest-api/repository/"
+        contains:
+            - com.force.api -> force-rest-api 

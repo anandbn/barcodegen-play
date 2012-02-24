@@ -1,5 +1,31 @@
 #{extends 'main.html' /}
 #{set title:'New Coupon' /}
+#{set 'morescripts'}
+<script type="text/javascript">
+
+function validate(){
+	var requiredFields = $(".required");
+	var hasErrors=false;
+	var errMsg = "Required Fields:\n";
+	for(var i=0;i<requiredFields.length;i++){
+		alert(requiredFields[i].id+":"+($("#"+requiredFields[i].id).val()==""));
+		if($("#"+requiredFields[i].id).val()==""){
+			$("#"+requiredFields[i].id).parent().addClass("error");
+			alert($('#errMsg'+requiredFields[i].id).attr('id'));
+			$('#errMsg'+requiredFields[i].id).css('display','block');
+			hasErrors=true;
+		}else{
+			$("#"+requiredFields[i].id).parent().removeClass("error");
+			$('#errMsg'+requiredFields[i].id).css('display','none');
+		}
+		
+	}
+	
+	return false;//!hasErrors;
+
+}
+</script>
+#{/set}
 <br/>
 #{ifErrors}
   <div class="alert alert-error">
@@ -14,11 +40,16 @@
   	</div>	
     <div class="span10">
       <form class="well" action="/qrCode" method="POST">
+        <div class="control-group">
         <label for="codeTxt" class="control-label">Coupon Text</label>
-        <input class="focussed" type="text" id="codeTxt" name="codeTxt" placeholder="Type something"/>
-		<span class="help-inline">This will be used to generate the QR Code</span>
+        <input class="focussed required" type="text" id="codeTxt" name="codeTxt" placeholder="Type something"/>
+        <span id="errMsgcodeText" class="help-inline" style="display:none">Required !!!!</span>
+		</div>
+		<div class="control-group">
 		<label for="title" class="control-label">Caption</label>
-		<input class="focussed" type="text" id="title" name="title"/>
+		<input class="focussed required" type="text" id="title" name="title"/>
+        <span id="errMsgcodeText" class="help-inline" style="display:none">Required !!!!</span>
+		</div>
 		<label for="description" class="control-label">Description</label>
 		<textarea class="focussed" id="description" name="description" rows="3"></textarea>	
 		<label for="width" class="control-label">Width</label>
@@ -39,7 +70,7 @@
 			<option>UPC_A</option>
 		</select>
         <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Generate</button>
+        <button type="submit" onClick="return validate();" class="btn btn-primary">Generate</button>
         </div>
       </form>
     </div>
