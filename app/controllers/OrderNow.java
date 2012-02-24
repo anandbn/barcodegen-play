@@ -39,7 +39,6 @@ public class OrderNow extends Controller {
 		flash.put("apiEndpoint",apiEndpoint);
 		System.out.println("##################  step-1-login ##################");
 		System.out.println(String.format(">>>>>>>>sesionId:%s,Api End point:%s",accessToken,apiEndpoint));
-		URL url;
 		try {
 			HttpRequest request = new HttpRequest().url(apiEndpoint+"/services/flow/startInterview/iPhone_iPad_Purchase")
 																		.method("POST")

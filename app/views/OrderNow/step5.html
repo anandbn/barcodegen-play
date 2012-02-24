@@ -26,13 +26,19 @@ function validate(){
 img{width:300px;height:190px}
 #{/set}
 <div class="container-fluid">
-	#{ifErrors}
-   <h1>Oops…</h1>
- 
-   #{errors}
-       <li class="alert alert-error">${error}</li>
-   #{/errors}
-#{/ifErrors}
+	<div class="row-fluid">
+		<div class="span2">
+		
+		</div>
+		<div class="span10">
+		<div class="progress progress-info progress-striped">
+		
+  		<div class="bar"
+       		style="width: 80%;"></div>
+		</div>
+		</div>
+	</div>
+
 	<div class="row-fluid">
 		<div class="span2">
 		</div>
