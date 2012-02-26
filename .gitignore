@@ -2,3 +2,4 @@ eclipse/
 tmp/
 modules/
 .DS_Store
+/lib

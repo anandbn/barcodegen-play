@@ -1,8 +1,11 @@
 # Application dependencies
 
 require:
+    - play 1.2.4
     - play -> pusher 0.1
     - play -> securesocial 0.2.4
+    - com.google.zxing -> javase 2.0
+    - com.google.zxing -> core 2.0
     - com.force.api -> force-rest-api 0.0.15
 repositories:
     - forcerestapi:
