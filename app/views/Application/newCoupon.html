@@ -1,29 +1,6 @@
 #{extends 'main.html' /}
 #{set title:'New Coupon' /}
-#{set 'morescripts'}
-<script type="text/javascript">
 
-function validate(){
-	var requiredFields = $(".required");
-	var hasErrors=false;
-	var errMsg = "Required Fields:\n";
-	for(var i=0;i<requiredFields.length;i++){
-		alert(requiredFields[i].id+":"+($("#"+requiredFields[i].id).val()==""));
-		if($("#"+requiredFields[i].id).val()==""){
-			$("#"+requiredFields[i].id).parent().addClass("error");
-			alert($('#errMsg'+requiredFields[i].id).attr('id'));
-			$('#errMsg'+requiredFields[i].id).css('display','block');
-			hasErrors=true;
-		}else{
-			$("#"+requiredFields[i].id).parent().removeClass("error");
-			$('#errMsg'+requiredFields[i].id).css('display','none');
-		}
-		
-	}
-	
-	return false;//!hasErrors;
-
-}
 </script>
 #{/set}
 <br/>
@@ -70,7 +47,7 @@ function validate(){
 			<option>UPC_A</option>
 		</select>
         <div class="form-actions">
-        <button type="submit" onClick="return validate();" class="btn btn-primary">Generate</button>
+        <button type="submit" class="btn btn-primary">Generate</button>
         </div>
       </form>
     </div>
