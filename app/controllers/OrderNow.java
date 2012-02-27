@@ -38,8 +38,6 @@ import org.apache.http.util.EntityUtils;
 
 import play.cache.Cache;
 import play.mvc.Controller;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 import xml.FlowResponse;
 import models.UserSessionInfo;
 
