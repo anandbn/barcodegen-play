@@ -417,8 +417,15 @@ public class OrderNow extends Controller {
 				}
 				accessToken = responseStr.replaceAll("^.*<sessionId>(.*)</sessionId>.*$", "$1").trim();
 				apiEndpoint = "https://"+ responseStr.replaceAll("^.*<serverUrl>.*https://([^/]*)/.*</serverUrl>.*$","$1").trim();
-				UserSessionInfo usrSession = new UserSessionInfo(accessToken,apiEndpoint);
-				Cache.add(session.getId(),usrSession );
+				UserSessionInfo usrSession = (UserSessionInfo)Cache.get(session.getId());
+				if(usrSession==null){
+					usrSession = new UserSessionInfo(accessToken,apiEndpoint);
+					Cache.add(session.getId(),usrSession );
+				}else{
+					usrSession = new UserSessionInfo(accessToken,apiEndpoint);
+					Cache.replace(session.getId(),usrSession );
+				}
+				
 				
 			}
 		} catch (UnsupportedEncodingException e1) {
