@@ -11,7 +11,6 @@ require:
     - com.google.zxing -> javase 2.0
     - com.google.zxing -> core 2.0
     - com.force.api -> force-rest-api 0.0.15
-    - redis.clients -> jedis 2.0.0
 repositories:
     - forcerestapi:
         type: iBiblio
