@@ -145,17 +145,21 @@ public class Application extends Controller {
 			}
 			
 			if(System.getenv("PUSHER_URL")!=null && System.getenv("PUSHER_URL").length()>0){
+				
 				Pattern HEROKU_PUSHER_URL_PATTERN = Pattern.compile("^http://([^:]*):([^@]*)@api.pusherapp.com/apps/([0-9]*)?");
+				System.out.println(String.format(">>>>>>>>>>>>>>>>PUSHER_URL=%s", System.getenv("PUSHER_URL")));
 				Matcher matcher = HEROKU_PUSHER_URL_PATTERN.matcher(System.getenv("PUSHER_URL"));
+				matcher.matches();
 	            System.out.println(String.format(">>>>>>>>>> Using PUSHER parameters:App Key=%s,App Secret=%s,App Id=%s",matcher.group(1),matcher.group(2),matcher.group(3)));
-				Pusher pusher = new Pusher(matcher.group(1),matcher.group(2),matcher.group(3));
+				Pusher pusher = new Pusher(matcher.group(3),matcher.group(1),matcher.group(2));
 				String jsonPushMessage = String.format("{\"title\":\"%s\",\"imgSrc\":\"%s\",\"description\":\"%s\"}",
 																			coupon.title,
 																			"/qrCode?couponId="+coupon.couponId,
 																			coupon.description);
 				System.out.println(">>>>>>>>>> Sending JSON message:"+jsonPushMessage);
 				HttpResponse response = pusher.trigger("coupons", "new_coupon",jsonPushMessage);
-		    	System.out.println(String.format("Sent pusher message successfully. Response :%s",response.getStatus()));	
+		    	System.out.println(String.format("Sent pusher message successfully. Response :%s",response.getString()));	
+		    	System.out.println("");
 			}
 			
 	    
