@@ -10,7 +10,7 @@
     	// Flash fallback logging - don't include this in production
     	WEB_SOCKET_DEBUG = true;
 
-    	var pusher = new Pusher('42124b048eefe2f59ea8');
+    	var pusher = new Pusher('9761ef6fb4c6a3392a58');
     	var channel = pusher.subscribe('coupons');
     	channel.bind('new_coupon', function(data) {
     		$.gritter.add({

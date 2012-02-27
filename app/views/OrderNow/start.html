@@ -3,6 +3,33 @@
 #{set 'moreStyles'}
 img{width:300px;height:190px}
 #{/set}
+
+#{if flowResponse.interview.hasTextInput}
+#{set 'morescripts'}
+<script type="text/javascript">
+
+function validate(){
+	var requiredFields = $(".required");
+	var hasErrors=false;
+	var errMsg = "Required Fields:\n";
+	for(var i=0;i<requiredFields.length;i++){
+		if($("#"+requiredFields[i].id).val()==""){
+			$("#"+requiredFields[i].id).parent().addClass("error");
+			hasErrors=true;
+		}else{
+			$("#"+requiredFields[i].id).parent().removeClass("error");
+		}
+		
+	}
+	if(!hasErrors){
+		$("#theForm").submit();
+	}
+}
+</script>
+
+#{/set}
+#{/if}
+
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span2">
@@ -11,8 +38,9 @@ img{width:300px;height:190px}
 		<div class="span10">
 		<div class="progress progress-info progress-striped">
 		
-  		<div class="bar"
-       		style="width: 16%;text-align:left;">1.Select Product</div>
+  		<div class="bar" style="width: ${((usrInfo.step/5)*100)}%;text-align:left;height:20px;">
+  		${flowResponse.interview.locationId}[S:${usrInfo.step},T=${flowResponse.interview.hasTextInput},C=${flowResponse.interview.hasChoices} ]
+  		</div>
 		</div>
 		</div>
 	</div>
@@ -22,7 +50,7 @@ img{width:300px;height:190px}
 		
 		</div>
 		<div class="span10">
-			<form class="well" method="POST">
+			<form id="theForm" class="well" method="POST" action="/OrderNow/navigate">
 				#{list items:flowResponse.interview.fields, as:'theField'}
     				
 					#{if theField.fieldType == 'DISPLAY_TEXT' }
@@ -34,15 +62,29 @@ img{width:300px;height:190px}
     					<ul class="thumbnails">
     					#{list items:theField.choices, as:'theChoice'}
     						<li class="thumbnail span4">
-    						<a href="/OrderNow/step2?selectedProduct=${theField.name}.${theChoice.name}">
+    						<a href="/OrderNow/navigate?_action=NEXT&${theField.name}.${theChoice.name}.selected=true">
     							#{verbatim}${theChoice.label}#{/verbatim}
     						</a>
     						</li>
     					#{/list}
+    					</ul>
 					#{/if}
+					#{if theField.fieldType == 'TEXT_INPUT' }
+						<div class="control-group">
+							<label for="${theField.name}" class="control-label">${theField.fieldText}</label>
+        					<input class="focussed #{if theField.required}required#{/if}" type="text" id="${theField.name}" name="${theField.name}" placeholder="${theField.rawValue}"/>
+						</div>
+					#{/if}
+					
 				#{/list}
-				
+				#{if (!flowResponse.interview.hasChoices && !flowResponse.interview.hasTextInput)}
+				<a href="/OrderNow/navigate?_action=NEXT" class="btn btn-primary">Next</a>
+        		#{/if}
+        		#{if flowResponse.interview.hasTextInput}
+				<a href="#" class="btn btn-primary" onClick="validate();">Submit</a>
+        		#{/if}
 			</form>
+				
 		</div>
 	</div>
 </div>

@@ -4,9 +4,14 @@ require:
     - play 1.2.4
     - play -> pusher 0.1
     - play -> securesocial 0.2.4
+    - commons-logging -> commons-logging 1.1.1
+    - commons-codec ->commons-codec 20041127.091804
+    - org.apache.httpcomponents -> httpcore 4.1.4
+    - org.apache.httpcomponents -> httpclient 4.1.3
     - com.google.zxing -> javase 2.0
     - com.google.zxing -> core 2.0
     - com.force.api -> force-rest-api 0.0.15
+    - redis.clients -> jedis 2.0.0
 repositories:
     - forcerestapi:
         type: iBiblio

@@ -12,11 +12,11 @@ public class Interview {
 	@XmlElements(
 		@XmlElement (name = "availableActions", type = AvailableActions.class) 
 	)
-	List availableActions;
+	List<AvailableActions> availableActions;
 	@XmlElements(
 			@XmlElement (name = "fields", type = Field.class) 
 	)
-	List fields;
+	List<Field> fields;
 	public String getLocationId() {
 		return locationId;
 	}
@@ -31,6 +31,41 @@ public class Interview {
 	}
 	public List getFields() {
 		return fields;
+	}
+	
+	public Boolean getHasNext(){
+		return hasAction("NEXT");
+	}
+	
+	public Boolean getHasPrevious(){
+		return hasAction("PREVIOUS");
+	}
+	
+	public Boolean getHasChoices(){
+		for(Field fld : this.fields){
+			if(fld.fieldType.equalsIgnoreCase("RADIO_BUTTONS")){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Boolean getHasTextInput(){
+		for(Field fld : this.fields){
+			if(fld.fieldType.equalsIgnoreCase("TEXT_INPUT")){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private Boolean hasAction(String actionId){
+		for(AvailableActions action : this.availableActions){
+			if(action.getId().equalsIgnoreCase(actionId)){
+				return true;
+			}
+		}
+		return false;
 	}
 	@Override
 	public String toString() {
